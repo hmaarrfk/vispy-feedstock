@@ -24,6 +24,7 @@ requirements:
     - python >=3.6
     - pip
     - setuptools
+    - msinttypes # [win]
     - fontconfig  # [unix]
     - numpy 1.11.3
     - cython
