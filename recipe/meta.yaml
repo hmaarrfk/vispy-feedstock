@@ -21,14 +21,14 @@ requirements:
     - m2-patch  # [win]
     - nodejs
   host:
-    - python
+    - python >=3.6
     - pip
     - setuptools
     - fontconfig  # [unix]
     - numpy 1.11.3
     - cython
   run:
-    - python
+    - python >=3.6
     - {{ pin_compatible('numpy') }}
     - fontconfig  # [unix]
 

@@ -8,13 +8,11 @@ osx_image: xcode6.4
 
 env:
   matrix:
-    - CONFIG=osx_python2.7
-    - CONFIG=osx_python3.5
-    - CONFIG=osx_python3.6
+    - CONFIG=osx_
 
   global:
     # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
-    - secure: "y28ZF+s9JvFZhhpqgxVFEP7g80TNg7/E11TFjLS6ut9sIPiwyFu25YGCdfklBqK9DPsOrZgJhe8VYUgYtRfGCmR81xYH7IrHCZJHY5R2HaGijJ1Wk1WHbBKepKn46cGHmqOp7bW6mmpY/6qEkzXIuUXrsjBIy8NfmdjgsjIJhbzxXRCK6nnyec/x+CjZjtOhEcmD+beyTzXMKgTY16sAcWl4/EQn7bilc+pCjJj8DKmDnFFRv0ULMnU/PHc/GQ+d3XlcCMI62ZSKxgAw43uN0YzMKJ6IBJJW2mU5BfoxEN8Fm2aEJX/fb098BO+8ESTauc5qkrymdpEqoewi+RfYWoqxIUDY4eBOHhYCiPyq5eGYi98GWdGKg6lJ2W6Lo+F0rGGd65HtwEKQdwD4cYiOzrkpM9UBDuWJSFbmQgJwJGzPb5+qFIMDD6Qc3WFAMFJ2mdF7gW6Bwfv/1a3ZxFWq+s0Ekibzu/z431uUE2bSL+5qWpAP5As3wPD6UxrpQCY61H+nCgOEq48Dp7266W2d0Kqi5wbbqr4ZDCoNudka7VYqdPH5eTsv1+7nLJ98vWpD4hNV3etn0J1Akhp0wYZ9FjfqigJbCaXAlJKiwlttRA7A86XpCStCESyw0HC909qJsCbhSbEwznJc+1jutpgYhV4STjBi3yv+yvCYsKYZ8xY="
+    - secure: "ZPZ3SJKt/maKq9ldOXcw8iGvd29dOvFe4oDVKl5JBgnajsdhnUt9bjPmAAgSv8+nXkOIBN5VQQoKOM1vBjQxX39s1Mplucd9sXMZMtvgEKHsQeEiXKqAmVNkW2Dui/Z6Ofy/QX2Bhb+xbnDWjjpFJNIJARvjuH2QjiEV5SweYGLRA8PvsyWaBCOPPd/N9KwY/MBAIbwg37hpGJiIh6CKbiodoVFKcCMyTlhr+cOiLtWK7N9DDv1YzKTDlq0PFWeCOMUnX4JIxSoX2IULLEm48twpyLnXuGENADlmOzd+AldYNkq4fEidq1pI+bOMLzZsmdOIksA6GgzFLE3cmSe5lF4nRz7WFZAExrPP+him8FZQkkMNka98WpeMm+UcyPrhiB+mJcCvkaFhmHI49MWiXlL2QK9mJCHfzNP6KAPY/WY3vd1x0BpBtJu71n7rhebaNFm/dz1OKD6yRW35Mw97fmsCxzisnPCbDaN3h1Yf0qNg/GlERIcbScuDFzm79lEL06QtKJpVaSXQoJQxOW/fkvPY/5zCqbmmqVPFZf4pJpMnkA3QRl9HJXUX3zNe3eE2d2BrVYlOaaY12ny/PKwVtxghx30WZLCgh0ykH38Yqtl7DT73DeSkLdp8TcDM1d6czS5QtnKhd2eMG+L0cfryDr7w0n/zYbf4Z1pHjVd1JqU="
 
 
 before_install:
@@ -51,6 +49,7 @@ install:
       conda config --remove channels defaults
       conda config --add channels defaults
       conda config --add channels conda-forge
+      conda config --add channels ramonaoptics
       conda config --set show_channel_urls true
       conda install --yes --quiet conda-forge-ci-setup=1
       source run_conda_forge_build_setup
@@ -58,4 +57,4 @@ install:
 script:
   - conda build ./recipe -m ./.ci_support/${CONFIG}.yaml
 
-  - upload_or_check_non_existence ./recipe conda-forge --channel=main -m ./.ci_support/${CONFIG}.yaml
+  - upload_or_check_non_existence ./recipe ramonaoptics --channel=main -m ./.ci_support/${CONFIG}.yaml
